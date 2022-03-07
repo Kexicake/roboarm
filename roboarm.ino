@@ -6,7 +6,7 @@
 
 #define pinServo A5
 #define pinEKG 0
-#define pinBUT 0
+#define pinBUT 1
 
 // int max_analog_dta      = 500;              // max analog data
 // int min_analog_dta      = 350;              // min analog data
