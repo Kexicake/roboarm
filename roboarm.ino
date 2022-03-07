@@ -1,9 +1,10 @@
 #include <Servo.h>
 
 // Библеотека для работы с сигналами от датчика ЭКГ
-#include <roboarm.h>
+#include "roboarm.h"
+#include "button.h"
 
-#define pinServo A7
+#define pinServo A5
 #define pinEKG 0
 
 // int max_analog_dta      = 500;              // max analog data
@@ -23,6 +24,8 @@
 Servo servo;
 // Servo servo1;
 roboarm roboarm1(pinEKG);
+
+button but(pinEKG);
 // get analog value
 // int getAnalog(int pin)
 // {
@@ -71,10 +74,21 @@ void setup()
     delay(1000);
     servo.write(0);
 }
-
+uint32_t tmr = millis();
+bool fl = false;
 void loop() {
+  
     Serial.println(roboarm1.getAnalog());
     // int val = getAnalog(A0);                    // get Analog value
     // cV = analogRead(0);  
 
+  // Часть кода которая обрабатывает поворот серво через кнобку без задержек в коде
+  if (but.click()){
+    servo.write(180);
+    tmr = millis();
+    fl = true;
+  }else if(millis()-tmr >= 250 && fl){
+    servo.write(0);
+    fl = false;
+  }
 }

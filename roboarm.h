@@ -1,5 +1,5 @@
-#if
-// Простенький класс работы с кнопами
+
+// Простенький класс работы протезом
 class roboarm {
   public:
     roboarm (byte pin) {
@@ -8,11 +8,11 @@ class roboarm {
     }
     
     int getAnalog(){
-        if (millis() - _trm >= 100){
+        if (millis() - _tmr >= 100){
             _tmr = millis();
             lastAnalog = analogRead(_pin);
         }
-        return lastAnalog
+        return lastAnalog;
     }
     
     //Типо когда нажимаешь или удерживаешь возвращаеться True
